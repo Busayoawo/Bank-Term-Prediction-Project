@@ -1,0 +1,79 @@
+
+This query explained in details bank customers loan and marital status, their jobs and also education level and also the contacts that was made in a specific month. 
+
+
+
+--Write an SQL query to count the number of married customers--
+In this query i counted/filtered out the numbers of customers in the database that are married 
+Select count (*) MarriedCustomer
+from [dbo].[BankTerm Deposit Predictions ]
+where marital = 'married'
+
+--How can you retrieve a list of all the different education levels in the dataset?--
+This query listed out the education levels of all customers in the database
+Select distinct Education
+from [dbo].[BankTerm Deposit Predictions ]
+
+--Find the maximum and minimum balance held by customers in the dataset---
+Here it explains the balance each customers as 
+Select max(balance) as Max_Balance, min(balance) as Min_Balance
+from [dbo].[BankTerm Deposit Predictions ]
+
+--How can you retrieve the total number of loan granted from the dataset---
+This query helps us to know the number of loans that was given out
+Select count (*) as Loan_granted
+from [dbo].[BankTerm Deposit Predictions ]
+where loan = 'yes'
+
+---Select all customers who are self employed and have a tetiary level of education---
+Here we were able to know customers who are self employed and their level of education
+SELECT count (*) 
+FROM [dbo].[BankTerm Deposit Predictions ]
+WHERE job = 'Self-Employed' AND education = 'Tertiary'
+
+---Find the average balance of customers who have defaulted on a loan---
+With this query we were able to know customers we gave loan to and have defaulted in paying them back.
+select avg(balance) as AVG_Balance_Default
+from [dbo].[BankTerm Deposit Predictions ]
+where [default] = 'yes'
+
+--List the jobs and marital status of all customers who have a negative balance---
+Here we were able to point out the jobs and marital status of customers who have a negative balance 
+Select job,marital
+from [dbo].[BankTerm Deposit Predictions ]
+where balance < 0 
+
+--Query the database for the number of contacts made in the month of may---
+This query helps us to know the number of contacts that was made in may
+SELECT COUNT(*) AS number_of_contacts
+FROM [dbo].[BankTerm Deposit Predictions ]
+WHERE MONTH = 'may'
+
+---INTERMEDIATE QUESTIONS---
+--QUESTION 1---
+--Write an sql query to determine how many customers own a house and have a loan---
+Here with this query, we were able to know how many customers that have a loan with us owns a house.
+Select count (*) as Customers_house_Loan
+from [dbo].[BankTerm Deposit Predictions ]
+where housing = 'yes' and loan = 'yes'
+
+--Question 2--
+--Generate a report that shows the average duration of contacts for each 
+--job role in the month of May---
+ SELECT AVG(duration) AS average_duration
+FROM [dbo].[BankTerm Deposit Predictions ]
+WHERE MONTH = 'May'
+GROUP BY job
+
+---ADVANCED QUESTIONS--
+--Question 1--
+--Identify customers who have a negative balance and categorize them by their job and
+--marital status show top 3 jobs with the highest number of such customers--
+Select top 3 job, marital, count (*) as Number_Customers
+from [dbo].[BankTerm Deposit Predictions ]
+where balance < 0 
+group by job, marital
+order by Number_Customers desc
+
+
+
